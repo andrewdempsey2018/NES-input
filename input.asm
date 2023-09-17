@@ -107,6 +107,8 @@ nmi:
     lda #$02
     sta $4014
 
+;write #$01 and #$00 to get the current state
+;of the player 1 and player 2 controllers
 getControllerstatus:
     lda #$01
     sta $4016
@@ -126,14 +128,10 @@ readUpDone:        ; handling this button is done
 
     rti
 
-
-
 paletteData:
 ;background
-;    .byte $22,$29,$1a,$0f,$22,$36,$17,$0f,$22,$30,$21,$0f,$22,$27,$17,$0f
     .byte $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d
 ;sprites
-;    .byte $22,$16,$27,$18,$22,$1a,$30,$27,$22,$16,$30,$27,$22,$0f,$36,$17
     .byte $1d, $01, $11, $21, $1d, $03, $13, $23, $1d, $07, $17, $27, $1d, $0a, $1a, $2a
 
 
