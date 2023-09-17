@@ -115,17 +115,72 @@ getControllerstatus:
     lda #$00
     sta $4016
 
-readUpButton: 
-    lda $4016       ; player 1 - A
-    and #%00000001  ; only look at bit 0
-    beq readUpDone   ; branch to ReadADone if button is NOT pressed (0)
-                  ; add instructions here to do something when button IS pressed (1)
-    lda $0203       ; load sprite X position
-    clc             ; make sure the carry flag is clear
-    adc #$01        ; A = A + 1
-    sta $0203       ; save sprite X position
-readUpDone:        ; handling this button is done
+;button status for each controller is returned in the following order:
+;A, B, Select, Start, Up, Down, Left, Right.
+;in this program, we are ignoring / skipping over A, B, Start, Select
+;and focusing on Up, Down, Left, Right.
 
+readAButton: ;ignore
+    lda $4016
+    jmp readADone
+readADone:
+
+readBButton: ;ignore
+    lda $4016
+    jmp readBDone
+readBDone:
+
+readSelectButton: ;ignore
+    lda $4016
+    jmp readSelectDone
+readSelectDone:
+
+readStartButton: ;ignore
+    lda $4016
+    jmp readStartDone
+readStartDone:
+
+readUpButton:
+    lda $4016
+    and #%00000001
+    beq readUpDone
+    lda $0203
+    clc
+    adc #$01
+    sta $0203
+readUpDone:
+
+readDownButton:
+    lda $4016
+    and #%00000001
+    beq readDownDone
+    lda $0203
+    clc
+    adc #$01
+    sta $0203
+readDownDone:
+
+readLeftButton:
+    lda $4016
+    and #%00000001
+    beq readLeftDone
+    lda $0200
+    clc
+    sbc #$01
+    sta $0200
+readLeftDone:
+
+readRightButton: 
+    lda $4016
+    and #%00000001
+    beq readRightDone
+    lda $0200
+    clc
+    adc #$01
+    sta $0200
+readRightDone:
+
+;return from interrupt
     rti
 
 paletteData:

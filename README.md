@@ -1,6 +1,6 @@
 # NES input
 
-Use the up / down / left / right buttons to move the ship around onscreen
+Use the up / down / left / right buttons on the NES controller to move the ship around on screen
 
 ![screenshot](scrshot.png)
 
@@ -13,6 +13,12 @@ Step 1: Assemble asm file into an object file
 Step 2: link the object file to the nes target (yields a .NES rom for use with emulator, tested on Fceux)
 
 **ld65 input.o -o input.nes -t nes**
+
+# Info
+
+Button status for each controller is returned in the following order: A, B, Select, Start, Up, Down, Left, Right.
+
+![NES controller](controller.png)
 
 # Links
 
