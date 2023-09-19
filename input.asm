@@ -119,6 +119,10 @@ getControllerstatus:
 ;A, B, Select, Start, Up, Down, Left, Right.
 ;in this program, we are ignoring / skipping over A, B, Start, Select
 ;and focusing on Up, Down, Left, Right.
+;$4016 contains the player 1 buttons
+;$4017 contains the player 2 buttons
+;the button information is contained in bit 0 of $4016 and $4017. The trick is to
+;use a 
 
 readAButton: ;ignore
     lda $4016
@@ -144,40 +148,40 @@ readUpButton:
     lda $4016
     and #%00000001
     beq readUpDone
-    lda $0203
+    lda $0218
     clc
-    adc #$01
-    sta $0203
+    sbc #$01
+    sta $0218
 readUpDone:
 
 readDownButton:
     lda $4016
     and #%00000001
     beq readDownDone
-    lda $0203
+    lda $0218
     clc
     adc #$01
-    sta $0203
+    sta $0218
 readDownDone:
 
 readLeftButton:
     lda $4016
     and #%00000001
     beq readLeftDone
-    lda $0200
+    lda $021b
     clc
     sbc #$01
-    sta $0200
+    sta $021b
 readLeftDone:
 
 readRightButton: 
     lda $4016
     and #%00000001
     beq readRightDone
-    lda $0200
+    lda $021b
     clc
     adc #$01
-    sta $0200
+    sta $021b
 readRightDone:
 
 ;return from interrupt
@@ -198,6 +202,8 @@ spriteData:
     .byte $94, $10, $00, $80
     .byte $94, $11, $00, $88
     .byte $94, $12, $00, $90
+
+    .byte $AA, $03, $00, $AA
 
 .segment "ZEROPAGE"
 

@@ -1,6 +1,6 @@
 # NES input
 
-Use the up / down / left / right buttons on the NES controller to move the ship around on screen
+Use the up / down / left / right buttons on the NES controller to move the sprite around on screen
 
 ![screenshot](scrshot.png)
 
